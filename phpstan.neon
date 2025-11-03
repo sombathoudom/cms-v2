@@ -1,0 +1,16 @@
+includes:
+    - vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - app
+        - database
+        - routes
+    tmpDir: storage/framework/cache/phpstan
+    ignoreErrors:
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+    universalObjectCratesClasses:
+        - Illuminate\Support\Collection
+        - Illuminate\Database\Eloquent\Collection
