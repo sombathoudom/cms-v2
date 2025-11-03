@@ -1,0 +1,894 @@
+id,title,body,labels,milestone
+E1-F1-I1,"E1-F1-I1: Establish authentication scaffolding","### Summary
+Set up Laravel Breeze-based authentication with login, registration, and password reset flows to satisfy core access requirements.
+
+### Scope
+- [ ] Install and configure Laravel Breeze with Blade scaffolding
+- [ ] Enable email verification and password reset notifications
+- [ ] Configure session timeout defaults and remember-me toggle
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None","epic:AuthUserManagement,type:Feature,priority:P0,area:Backend",Week 1
+E1-F1-I2,"E1-F1-I2: Enforce password policy and session guard","### Summary
+Implement configurable password complexity rules and session timeout enforcement aligned with security requirements.
+
+### Scope
+- [ ] Define password validation rules (length, character sets, reuse policy)
+- [ ] Implement session timeout with configurable idle threshold
+- [ ] Add validation feedback to auth views and localization strings
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F1-I1","epic:AuthUserManagement,type:Feature,priority:P0,area:Security",Week 1
+E1-F1-I3,"E1-F1-I3: Implement authentication audit trail","### Summary
+Capture login, logout, and credential update events in an immutable audit log for compliance.
+
+### Scope
+- [ ] Configure audit log channel and schema for auth events
+- [ ] Instrument login/logout/reset flows to emit events
+- [ ] Provide admin view filterable by user and date range
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F1-I1","epic:AuthUserManagement,type:Feature,priority:P0,area:Observability",Week 2
+E1-F2-I1,"E1-F2-I1: Build user administration dashboard","### Summary
+Create an admin-facing CRUD interface for managing users with search, filters, and pagination.
+
+### Scope
+- [ ] Generate Filament resource for users with soft delete support
+- [ ] Add search by email/name and role filters
+- [ ] Include bulk actions for activate/deactivate
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F1-I1","epic:AuthUserManagement,type:Feature,priority:P0,area:AdminUI",Week 2
+E1-F2-I2,"E1-F2-I2: Implement role and permission assignment","### Summary
+Enable administrators to assign roles (Admin, Editor, Author, Viewer) and enforce middleware guards per route.
+
+### Scope
+- [ ] Seed default roles and permissions aligned with workflow
+- [ ] Protect admin routes with permission middleware
+- [ ] Expose role assignment UI in user detail view
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F2-I1","epic:AuthUserManagement,type:Feature,priority:P0,area:RBAC",Week 2
+E1-F2-I3,"E1-F2-I3: Record user management audits","### Summary
+Log create, update, delete actions performed on user accounts for accountability.
+
+### Scope
+- [ ] Emit audit events for CRUD actions in user dashboard
+- [ ] Store actor, target user, change summary, and timestamp
+- [ ] Provide export to CSV for compliance review
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F2-I1","epic:AuthUserManagement,type:Feature,priority:P1,area:Observability",Week 3
+E2-F1-I1,"E2-F1-I1: Design unified content schema","### Summary
+Define database schema and Eloquent models to support unified posts/pages content with required fields.
+
+### Scope
+- [ ] Create migrations for content, revisions, and scheduling tables
+- [ ] Implement Eloquent models with relationships to authors and media
+- [ ] Add repository interfaces for content retrieval
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F2-I2","epic:ContentManagement,type:Feature,priority:P0,area:Backend",Week 1
+E2-F1-I2,"E2-F1-I2: Implement content lifecycle states","### Summary
+Add draft, review, published, and scheduled states with validation for publish dates.
+
+### Scope
+- [ ] Add state machine or enums to model workflow states
+- [ ] Enforce publish_at scheduling with queue worker dispatch
+- [ ] Provide policy hooks restricting actions per role
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:ContentManagement,type:Feature,priority:P0,area:Workflow",Week 2
+E2-F1-I3,"E2-F1-I3: Enable revision history and rollback","### Summary
+Provide version history for content with the ability to preview and restore previous revisions.
+
+### Scope
+- [ ] Store revision snapshots on update with diff metadata
+- [ ] Create UI to compare revisions and trigger rollback
+- [ ] Emit events for revision creation and restore
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I2","epic:ContentManagement,type:Feature,priority:P1,area:AdminUI",Week 3
+E2-F2-I1,"E2-F2-I1: Integrate rich text editor","### Summary
+Embed CKEditor with media embedding, formatting toolbar, and autosave support for drafts.
+
+### Scope
+- [ ] Configure CKEditor build with required plugins
+- [ ] Wire autosave API endpoint with throttling
+- [ ] Implement preview mode rendering via signed route
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:ContentManagement,type:Feature,priority:P0,area:Editor",Week 2
+E2-F2-I2,"E2-F2-I2: Build content duplication and quick publish","### Summary
+Allow editors to duplicate existing content and publish immediately when permitted.
+
+### Scope
+- [ ] Add duplicate action that clones content, taxonomy, media, and metadata
+- [ ] Respect workflow permissions on quick publish
+- [ ] Provide toast notifications summarizing actions
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I1","epic:ContentManagement,type:Feature,priority:P1,area:Workflow",Week 3
+E2-F2-I3,"E2-F2-I3: Configure content preview links","### Summary
+Generate signed preview URLs with expiration for draft and review states.
+
+### Scope
+- [ ] Create signed route with expiration enforcement
+- [ ] Add preview request logging with actor metadata
+- [ ] Surface preview link copy action in editor UI
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I1","epic:ContentManagement,type:Feature,priority:P1,area:Security",Week 3
+E3-F1-I1,"E3-F1-I1: Implement media upload pipeline","### Summary
+Provide validated media uploads with storage abstraction and thumbnail generation.
+
+### Scope
+- [ ] Configure Flysystem drivers for local and S3 targets
+- [ ] Enforce file validation rules and MIME restrictions
+- [ ] Generate queued thumbnail jobs with optimization
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:MediaLibrary,type:Feature,priority:P0,area:Storage",Week 2
+E3-F1-I2,"E3-F1-I2: Build media browser interface","### Summary
+Create centralized media browser with search, filters, and pagination for reuse across editors.
+
+### Scope
+- [ ] Develop Filament media manager with metadata columns
+- [ ] Add filters for type, uploader, and date range
+- [ ] Support insertion into content editor via modal picker
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1","epic:MediaLibrary,type:Feature,priority:P1,area:AdminUI",Week 3
+E3-F1-I3,"E3-F1-I3: Support media replacements with stable URLs","### Summary
+Allow replacing an existing media file while keeping the canonical URL unchanged.
+
+### Scope
+- [ ] Implement versioned storage and metadata retention
+- [ ] Validate replacement permissions and file type compatibility
+- [ ] Update CDN cache invalidation hooks post-replace
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1","epic:MediaLibrary,type:Feature,priority:P1,area:Storage",Week 3
+E3-F1-I4,"E3-F1-I4: Link media to content entities","### Summary
+Establish polymorphic relationships connecting media assets to posts and pages for attachment tracking.
+
+### Scope
+- [ ] Create pivot tables with indexes for content-media links
+- [ ] Update repositories to eager load media associations
+- [ ] Ensure deletion policies respect orphan cleanup rules
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1","epic:MediaLibrary,type:Feature,priority:P1,area:Backend",Week 3
+E4-F1-I1,"E4-F1-I1: Implement taxonomy schema","### Summary
+Create categories and tags with hierarchical support and relationships to content.
+
+### Scope
+- [ ] Define migrations and models for categories and tags
+- [ ] Add pivot tables with indexes for tag assignments
+- [ ] Enforce unique slugs scoped by taxonomy type
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:TaxonomyMetadata,type:Feature,priority:P0,area:Backend",Week 2
+E4-F1-I2,"E4-F1-I2: Build taxonomy management UI","### Summary
+Deliver admin CRUD interfaces with hierarchy controls and SEO metadata fields.
+
+### Scope
+- [ ] Create Filament resources for categories and tags
+- [ ] Support drag-and-drop reordering and parent assignment
+- [ ] Include meta title/description/canonical fields with validation
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F1-I1","epic:TaxonomyMetadata,type:Feature,priority:P1,area:AdminUI",Week 3
+E4-F1-I3,"E4-F1-I3: Generate sitemap and robots management","### Summary
+Automate XML sitemap generation and editable robots.txt based on taxonomy and content.
+
+### Scope
+- [ ] Build scheduled job to generate sitemap indexes and detail files
+- [ ] Create admin UI for robots.txt editing with validation
+- [ ] Integrate with cache busting when taxonomy/content changes
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F1-I1","epic:TaxonomyMetadata,type:Feature,priority:P1,area:SEO",Week 3
+E4-F1-I4,"E4-F1-I4: Apply taxonomy-aware routing","### Summary
+Implement URL structures incorporating category slugs and expose filters on listings.
+
+### Scope
+- [ ] Define route patterns /blog/{category}/{slug} with fallback rules
+- [ ] Update controllers to filter content by taxonomy in admin and public views
+- [ ] Add query scopes and indexes for taxonomy filters
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F1-I1","epic:TaxonomyMetadata,type:Feature,priority:P1,area:Routing",Week 3
+E5-F1-I1,"E5-F1-I1: Configure publishing workflow transitions","### Summary
+Model draft to review to published transitions with permission-guarded actions.
+
+### Scope
+- [ ] Define workflow service orchestrating status transitions
+- [ ] Map role permissions to available transitions
+- [ ] Log workflow changes with actor context
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I2","epic:PublishingWorkflow,type:Feature,priority:P0,area:Workflow",Week 2
+E5-F1-I2,"E5-F1-I2: Implement scheduling queue integration","### Summary
+Support scheduled publishing via queue workers respecting publish_at timestamps.
+
+### Scope
+- [ ] Configure queue job to publish scheduled content
+- [ ] Ensure cron/queue worker orchestration with retries
+- [ ] Notify stakeholders on scheduled publish execution
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I1","epic:PublishingWorkflow,type:Feature,priority:P0,area:DevOps",Week 2
+E5-F1-I3,"E5-F1-I3: Deliver publish notifications and change logs","### Summary
+Send notifications for review approvals and maintain change history for workflow events.
+
+### Scope
+- [ ] Create notification classes for workflow events
+- [ ] Persist change logs with actor, timestamp, and notes
+- [ ] Provide admin UI to review workflow change history
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I1","epic:PublishingWorkflow,type:Feature,priority:P1,area:Notifications",Week 3
+E5-F1-I4,"E5-F1-I4: Support workflow rollbacks","### Summary
+Enable reverting published posts back to draft while retaining audit visibility.
+
+### Scope
+- [ ] Add service method to revert published content to draft
+- [ ] Record rollback reason and actor in logs
+- [ ] Update policies to restrict rollback to editors and admins
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I1","epic:PublishingWorkflow,type:Feature,priority:P1,area:Workflow",Week 3
+E6-F1-I1,"E6-F1-I1: Build Blade theme skeleton","### Summary
+Establish base Blade layouts with configurable regions for navigation, breadcrumbs, and content.
+
+### Scope
+- [ ] Create master layout with sections for header, footer, and breadcrumbs
+- [ ] Implement menu and widget components with dynamic data
+- [ ] Configure asset pipeline with cache busting strategy
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:PublicFrontend,type:Feature,priority:P0,area:Frontend",Week 2
+E6-F1-I2,"E6-F1-I2: Implement public content delivery","### Summary
+Render SEO-friendly routes for posts and pages with pagination, search, and archives.
+
+### Scope
+- [ ] Build controllers for post/page detail and listing views
+- [ ] Implement search with Scout or database fallback
+- [ ] Add pagination and archive filtering by month/year
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F1-I1","epic:PublicFrontend,type:Feature,priority:P0,area:Frontend",Week 3
+E6-F1-I3,"E6-F1-I3: Add caching and invalidation layer","### Summary
+Introduce caching for rendered pages and ensure invalidation on content updates.
+
+### Scope
+- [ ] Configure cache driver (Redis/file) for page fragments
+- [ ] Tag cache entries per content entity and taxonomy
+- [ ] Trigger cache busting from content events and publishing workflow
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F1-I1","epic:PublicFrontend,type:Feature,priority:P1,area:Performance",Week 3
+E6-F1-I4,"E6-F1-I4: Provide configurable home and error pages","### Summary
+Allow admins to choose homepage content and customize 404/maintenance templates.
+
+### Scope
+- [ ] Add setting for selecting homepage page ID
+- [ ] Build editable 404 and maintenance Blade templates with configuration
+- [ ] Ensure cache purge when settings change
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I1","epic:PublicFrontend,type:Feature,priority:P1,area:Frontend",Week 4
+E7-F1-I1,"E7-F1-I1: Implement site settings registry","### Summary
+Build CRUD interface for global settings including site name, branding, and metadata defaults.
+
+### Scope
+- [ ] Create settings storage with caching and invalidation
+- [ ] Provide Filament forms for general, branding, and locale settings
+- [ ] Support JSON export/import for backup and restore
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F2-I2","epic:SiteConfiguration,type:Feature,priority:P0,area:AdminUI",Week 2
+E7-F1-I2,"E7-F1-I2: Develop menu management module","### Summary
+Provide nested navigation management with drag ordering and assignment to frontend regions.
+
+### Scope
+- [ ] Model menus and items with hierarchical structure
+- [ ] Build UI for nested drag-and-drop ordering
+- [ ] Expose menus to Blade via view composers or components
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I1","epic:SiteConfiguration,type:Feature,priority:P1,area:Frontend",Week 3
+E7-F1-I3,"E7-F1-I3: Configure theme and announcement settings","### Summary
+Enable dynamic theme selection, announcement banners, and footer editor with preview.
+
+### Scope
+- [ ] Implement theme toggle (light/dark) with persisted preference
+- [ ] Add announcement banner WYSIWYG with scheduling controls
+- [ ] Provide footer editor supporting rich text snippets
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I1","epic:SiteConfiguration,type:Feature,priority:P1,area:Frontend",Week 3
+E7-F1-I4,"E7-F1-I4: Harden settings audit and backups","### Summary
+Log configuration changes and ensure reliable backup/restore with validation.
+
+### Scope
+- [ ] Capture audit entries for settings changes with diff summary
+- [ ] Validate imported JSON before applying changes
+- [ ] Schedule periodic settings backup job
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I1","epic:SiteConfiguration,type:Feature,priority:P1,area:Security",Week 4
+E8-F1-I1,"E8-F1-I1: Expose public content API","### Summary
+Create read-only JSON:API endpoints for published content with pagination and filters.
+
+### Scope
+- [ ] Define routes and controllers returning JSON:API compliant payloads
+- [ ] Implement pagination, sorting, and taxonomy filtering
+- [ ] Enforce rate limiting for public endpoints
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:APIHeadless,type:Feature,priority:P0,area:API",Week 3
+E8-F1-I2,"E8-F1-I2: Deliver authenticated CRUD API","### Summary
+Provide Sanctum-protected endpoints for admins/editors to manage content remotely.
+
+### Scope
+- [ ] Configure Sanctum token auth with role checks
+- [ ] Build CRUD endpoints respecting workflow policies
+- [ ] Document endpoints via OpenAPI generator
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F1-I1","epic:APIHeadless,type:Feature,priority:P0,area:API",Week 3
+E8-F1-I3,"E8-F1-I3: Implement webhook notifications","### Summary
+Trigger webhooks on publish/update events with retry handling and signing.
+
+### Scope
+- [ ] Define webhook subscriptions model with secret management
+- [ ] Emit events on publish/update and dispatch webhook jobs
+- [ ] Provide delivery logs and retry controls
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F1-I1","epic:APIHeadless,type:Feature,priority:P1,area:Integrations",Week 4
+E8-F1-I4,"E8-F1-I4: Publish API documentation portal","### Summary
+Generate and host Swagger UI reflecting available API endpoints with authentication guidance.
+
+### Scope
+- [ ] Produce OpenAPI spec via annotations or generator
+- [ ] Serve interactive docs behind admin auth
+- [ ] Add versioning notes and changelog entries
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F1-I2","epic:APIHeadless,type:Feature,priority:P1,area:Docs",Week 4
+E9-F1-I1,"E9-F1-I1: Harden input validation","### Summary
+Ensure all request validation sanitizes inputs and mitigates CSRF/XSS threats.
+
+### Scope
+- [ ] Centralize form requests with strict validation rules
+- [ ] Enable HTML sanitization for rich text inputs
+- [ ] Confirm CSRF middleware coverage and add tests
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:SecurityCompliance,type:Feature,priority:P0,area:Security",Week 1
+E9-F1-I2,"E9-F1-I2: Enforce rate limiting and encryption","### Summary
+Configure rate limiting for auth/API endpoints and ensure secure password hashing.
+
+### Scope
+- [ ] Define rate limiters for login and public API routes
+- [ ] Verify password hashing uses argon2/bcrypt with tuning
+- [ ] Add monitoring alerts for rate limit violations
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F1-I1","epic:SecurityCompliance,type:Feature,priority:P0,area:Security",Week 2
+E9-F1-I3,"E9-F1-I3: Implement security monitoring","### Summary
+Integrate Laravel Telescope and logging to track access and admin actions.
+
+### Scope
+- [ ] Configure Telescope with protected access controls
+- [ ] Forward logs to JSON format with correlation IDs
+- [ ] Document security audit procedures for weekly review
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F1-I2","epic:SecurityCompliance,type:Feature,priority:P1,area:Observability",Week 3
+E10-F1-I1,"E10-F1-I1: Configure CI pipeline","### Summary
+Set up GitHub Actions workflow for tests, static analysis, and linting on pull requests.
+
+### Scope
+- [ ] Create workflow running PHPUnit, Pest, Larastan, and PHP CS Fixer
+- [ ] Cache dependencies for faster builds
+- [ ] Enforce minimum 70% coverage gate with fail condition
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None","epic:DevOpsQA,type:Feature,priority:P0,area:CI",Week 1
+E10-F1-I2,"E10-F1-I2: Prepare environment templates","### Summary
+Provide environment configuration examples for dev, staging, and production with secure defaults.
+
+### Scope
+- [ ] Create .env.example variants with documented secrets
+- [ ] Document queue, cache, and storage configuration expectations
+- [ ] Include deployment checklist for ops handoff
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F1-I1","epic:DevOpsQA,type:Feature,priority:P1,area:DevOps",Week 2
+E10-F1-I3,"E10-F1-I3: Seed data and rollback scripts","### Summary
+Create database seeders and rollback scripts supporting repeatable QA cycles.
+
+### Scope
+- [ ] Build seeders for roles, demo users, taxonomy, and sample content
+- [ ] Provide artisan commands for reset and rollback flows
+- [ ] Document QA checklist covering critical flows
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1","epic:DevOpsQA,type:Feature,priority:P1,area:QA",Week 2
+E10-F1-I4,"E10-F1-I4: Establish manual QA approval flow","### Summary
+Define manual QA checklist, staging approval process, and release readiness artifacts.
+
+### Scope
+- [ ] Draft QA checklist covering MVP features and edge cases
+- [ ] Set up staging approval workflow with sign-off tracking
+- [ ] Integrate checklist into release engineering documentation
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F1-I3","epic:DevOpsQA,type:Feature,priority:P1,area:QA",Week 3
+E11-F1-I1,"E11-F1-I1: Establish modular folder structure","### Summary
+Organize Laravel project using domain-driven modules with service and repository layers.
+
+### Scope
+- [ ] Define module directories for auth, content, media, taxonomy, workflow
+- [ ] Configure autoloading and service providers per module
+- [ ] Document conventions for adding new modules
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None","epic:SystemArchitecture,type:Feature,priority:P0,area:Architecture",Week 1
+E11-F1-I2,"E11-F1-I2: Implement repository pattern","### Summary
+Introduce repository interfaces and concrete implementations for core entities with caching decorators.
+
+### Scope
+- [ ] Define interfaces for content, media, taxonomy repositories
+- [ ] Implement repositories with dependency injection bindings
+- [ ] Add caching decorators leveraging tag-based invalidation
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F1-I1","epic:SystemArchitecture,type:Feature,priority:P0,area:Architecture",Week 2
+E11-F1-I3,"E11-F1-I3: Configure event-driven hooks","### Summary
+Set up domain events for publish and workflow actions feeding cache invalidation and webhooks.
+
+### Scope
+- [ ] Define events and listeners for publish lifecycle
+- [ ] Wire listeners to trigger cache clears and webhook dispatch
+- [ ] Add feature flags to toggle integrations per environment
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F1-I2","epic:SystemArchitecture,type:Feature,priority:P1,area:Architecture",Week 3
+E11-F1-I4,"E11-F1-I4: Prepare localization and multi-site readiness","### Summary
+Lay groundwork for localization and multi-site support with configurable site contexts.
+
+### Scope
+- [ ] Abstract site context via middleware and configuration
+- [ ] Ensure models support locale fields and fallback logic
+- [ ] Document approach for multi-site extension post-MVP
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Multi-site/tenant scope enforced (if applicable)
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F1-I1","epic:SystemArchitecture,type:Feature,priority:P1,area:Architecture",Week 3

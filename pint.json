@@ -1,0 +1,4 @@
+{
+    "$schema": "https://laravel.com/schema/pint.json",
+    "preset": "strict"
+}
