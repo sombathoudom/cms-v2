@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'public_api' => [
+        'rate_limit' => env('PUBLIC_API_RATE_LIMIT', 60),
+    ],
+
+    'auth' => [
+        'login_rate_limit' => env('LOGIN_RATE_LIMIT', 5),
+        'password_reset_rate_limit' => env('PASSWORD_RESET_RATE_LIMIT', 5),
+    ],
+
 ];

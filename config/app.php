@@ -17,6 +17,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'tagline' => env('APP_TAGLINE', 'Content managed with care'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

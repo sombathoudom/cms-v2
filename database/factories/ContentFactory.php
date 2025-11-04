@@ -39,4 +39,36 @@ class ContentFactory extends Factory
             'meta' => ['reading_time' => fake()->numberBetween(1, 10)],
         ];
     }
+
+    public function published(): self
+    {
+        return $this->state(function () {
+            $publishedAt = now()->subDays(fake()->numberBetween(0, 10));
+
+            return [
+                'status' => 'published',
+                'publish_at' => $publishedAt,
+                'published_at' => $publishedAt,
+            ];
+        });
+    }
+
+    public function draft(): self
+    {
+        return $this->state(fn () => [
+            'status' => 'draft',
+            'publish_at' => null,
+            'published_at' => null,
+        ]);
+    }
+
+    public function post(): self
+    {
+        return $this->state(fn () => ['type' => 'post']);
+    }
+
+    public function page(): self
+    {
+        return $this->state(fn () => ['type' => 'page']);
+    }
 }

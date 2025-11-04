@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: CMS v2 API
+  version: 0.1.0
+servers:
+  - url: http://localhost:8000/api/v1
+paths:
+  /posts:
+    get:
+      summary: List published posts
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: tag
+          schema:
+            type: string
+        - in: query
+          name: year
+          schema:
+            type: integer
+        - in: query
+          name: month
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - meta
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JsonApiPost'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /posts/{slug}:
+    get:
+      summary: Fetch a published post by slug
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    $ref: '#/components/schemas/JsonApiPost'
+                  links:
+                    $ref: '#/components/schemas/ResourceLinks'
+        '404':
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pages/{slug}:
+    get:
+      summary: Fetch a published page by slug
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    $ref: '#/components/schemas/JsonApiPage'
+                  links:
+                    $ref: '#/components/schemas/ResourceLinks'
+        '404':
+          description: Page not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    JsonApiIdentifier:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+    JsonApiPost:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+        - relationships
+        - links
+      properties:
+        type:
+          type: string
+          enum: [posts]
+        id:
+          type: string
+        attributes:
+          type: object
+          required:
+            - title
+            - slug
+            - excerpt
+            - body
+            - published_at
+            - is_sticky
+          properties:
+            title:
+              type: string
+            slug:
+              type: string
+            excerpt:
+              type: string
+              nullable: true
+            body:
+              type: string
+              nullable: true
+            published_at:
+              type: string
+              format: date-time
+              nullable: true
+            is_sticky:
+              type: boolean
+        relationships:
+          type: object
+          properties:
+            author:
+              type: object
+              properties:
+                data:
+                  oneOf:
+                    - $ref: '#/components/schemas/JsonApiIdentifier'
+                    - type: 'null'
+            category:
+              type: object
+              properties:
+                data:
+                  oneOf:
+                    - $ref: '#/components/schemas/JsonApiIdentifier'
+                    - type: 'null'
+                meta:
+                  nullable: true
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    slug:
+                      type: string
+            tags:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JsonApiIdentifier'
+                meta:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      slug:
+                        type: string
+            featured_media:
+              type: object
+              properties:
+                data:
+                  oneOf:
+                    - $ref: '#/components/schemas/JsonApiIdentifier'
+                    - type: 'null'
+                meta:
+                  nullable: true
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    disk:
+                      type: string
+        links:
+          $ref: '#/components/schemas/ResourceLinks'
+    JsonApiPage:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+        - links
+      properties:
+        type:
+          type: string
+          enum: [pages]
+        id:
+          type: string
+        attributes:
+          type: object
+          required:
+            - title
+            - slug
+            - body
+            - published_at
+          properties:
+            title:
+              type: string
+            slug:
+              type: string
+            body:
+              type: string
+            published_at:
+              type: string
+              format: date-time
+              nullable: true
+        links:
+          $ref: '#/components/schemas/ResourceLinks'
+    PaginationMeta:
+      type: object
+      required:
+        - total
+        - per_page
+        - current_page
+        - last_page
+      properties:
+        total:
+          type: integer
+        per_page:
+          type: integer
+        current_page:
+          type: integer
+        last_page:
+          type: integer
+    PaginationLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          format: uri
+        first:
+          type: string
+          format: uri
+          nullable: true
+        last:
+          type: string
+          format: uri
+          nullable: true
+        prev:
+          type: string
+          format: uri
+          nullable: true
+        next:
+          type: string
+          format: uri
+          nullable: true
+    ResourceLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          format: uri
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+            message:
+              type: string
