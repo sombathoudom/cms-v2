@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Laravel\Scout\EngineManager;
 
 class AppServiceProvider extends ServiceProvider
@@ -37,6 +38,22 @@ class AppServiceProvider extends ServiceProvider
             return [
                 Limit::perMinute(max($limit, 1))->by($request->ip() ?? 'public'),
             ];
+        });
+
+        RateLimiter::for('login', function (Request $request) {
+            $email = Str::lower((string) $request->input('email'));
+            $key = $email.'|'.($request->ip() ?? 'unknown');
+            $limit = (int) Config::get('services.auth.login_rate_limit', 5);
+
+            return Limit::perMinute(max($limit, 1))->by($key);
+        });
+
+        RateLimiter::for('password-reset', function (Request $request) {
+            $email = Str::lower((string) $request->input('email'));
+            $key = 'password-reset|'.$email.'|'.($request->ip() ?? 'unknown');
+            $limit = (int) Config::get('services.auth.password_reset_rate_limit', 5);
+
+            return Limit::perMinute(max($limit, 1))->by($key);
         });
     }
 

@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- Authentication scaffolding with Breeze-powered login, registration, password reset, and email verification flows with audit logging.
 - Public web delivery for posts and pages with archive and search filtering.
 - JSON API endpoints for published posts and pages with standard error responses.
 - Hardened public content API responses to JSON:API spec with pagination links, rate limiting, and API logging.

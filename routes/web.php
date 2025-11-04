@@ -14,3 +14,5 @@ Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show')
 Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show');
 
 Route::get('/health', \App\Http\Controllers\HealthController::class);
+
+require __DIR__.'/auth.php';

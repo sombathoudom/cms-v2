@@ -52,6 +52,13 @@ CI enforces Pint, PHPStan (level 8), and Pest across PHP 8.3/8.4 with MySQL & Po
 - Extensive migrations for CMS entities with soft deletes and foreign keys
 - Demo seed data (**DO NOT USE IN PRODUCTION**)
 
+## Authentication & User Management
+
+- Public routes provide registration, login, password reset, and email verification powered by Laravel Breeze.
+- Session storage defaults to the database driver with configurable lifetime and optional remember-me cookies.
+- Successful authentication updates `last_login_at`, writes structured audit logs, and respects spatie/laravel-permission roles (default registrants receive the Viewer role).
+- Password reset and verification flows are rate-limited and emit hashed identifiers in logs to avoid exposing PII.
+
 ## Public Content Delivery
 
 - Visit `http://localhost:8000/posts` to view the blog listing with search and archive navigation.
