@@ -114,6 +114,7 @@ class DatabaseSeeder extends Seeder
         $media = Media::factory()->count(5)->create();
 
         Content::factory()->count(6)->published()->post()->create()->each(function (Content $content) use ($tags, $media, $categories, $editor) {
+        Content::factory()->count(5)->create()->each(function (Content $content) use ($tags, $media, $categories, $editor) {
             $content->tags()->sync($tags->random(2));
             $content->category()->associate($categories->random());
             $content->featuredMedia()->associate($media->random());

@@ -47,36 +47,8 @@ CI enforces Pint, PHPStan (level 8), and Pest across PHP 8.3/8.4 with MySQL & Po
 - Filament admin panel resources for Content, Media, Taxonomy, and Settings
 - Role and permission management via spatie/laravel-permission
 - Health check endpoint at `/health`
-- Public blog and page delivery at `/posts` and `/pages/{slug}` with archive and search support
-- JSON API for posts and pages under `/api/v1`
 - Extensive migrations for CMS entities with soft deletes and foreign keys
 - Demo seed data (**DO NOT USE IN PRODUCTION**)
-
-## Authentication & User Management
-
-- Public routes provide registration, login, password reset, and email verification powered by Laravel Breeze.
-- Session storage defaults to the database driver with configurable lifetime and optional remember-me cookies.
-- Successful authentication updates `last_login_at`, writes structured audit logs, and respects spatie/laravel-permission roles (default registrants receive the Viewer role).
-- Password reset and verification flows are rate-limited and emit hashed identifiers in logs to avoid exposing PII.
-
-## Public Content Delivery
-
-- Visit `http://localhost:8000/posts` to view the blog listing with search and archive navigation.
-- Individual posts are available at `http://localhost:8000/posts/{slug}` and pages at `http://localhost:8000/pages/{slug}`.
-- All responses emit an `X-Correlation-ID` header for tracing and audit logs record every view event.
-
-## API Usage
-
-- List published posts: `GET /api/v1/posts`
-  - Supports JSON:API pagination with `meta` + `links` objects.
-  - Filters: `q`, `category`, `tag`, `year`, `month`, `per_page` (max 50).
-- Retrieve a published post: `GET /api/v1/posts/{slug}`
-- Retrieve a published page: `GET /api/v1/pages/{slug}`
-
-All endpoints emit JSON:API compliant `data` payloads and structured errors `{ "error": { "code": "...", "message": "..." } }`.
-Public endpoints are rate limited (default 60 requests/minute per IP) and every call is captured in the `api_logs` table with correlation IDs for observability.
-
-See `OPENAPI.yaml` for full request/response contracts.
 
 ## License
 
