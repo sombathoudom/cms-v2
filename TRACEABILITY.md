@@ -1,0 +1,56 @@
+| ID | Title | Labels | Milestone | Issue # | State | Timestamp |
+|----|-------|--------|-----------|---------|-------|-----------|
+| E1-F1-I1 | E1-F1-I1: Establish authentication scaffolding | epic:AuthUserManagement,type:Feature,priority:P0,area:Backend | Week 1 | 1 | OPEN | 2025-11-03T03:26:02.259952+00:00 |
+| E1-F1-I2 | E1-F1-I2: Enforce password policy and session guard | epic:AuthUserManagement,type:Feature,priority:P0,area:Security | Week 1 | 2 | OPEN | 2025-11-03T03:26:04.370213+00:00 |
+| E1-F1-I3 | E1-F1-I3: Implement authentication audit trail | epic:AuthUserManagement,type:Feature,priority:P0,area:Observability | Week 2 | 3 | OPEN | 2025-11-03T03:26:06.494442+00:00 |
+| E1-F2-I1 | E1-F2-I1: Build user administration dashboard | epic:AuthUserManagement,type:Feature,priority:P0,area:AdminUI | Week 2 | 4 | OPEN | 2025-11-03T03:26:08.668082+00:00 |
+| E1-F2-I2 | E1-F2-I2: Implement role and permission assignment | epic:AuthUserManagement,type:Feature,priority:P0,area:RBAC | Week 2 | 5 | OPEN | 2025-11-03T03:26:10.713951+00:00 |
+| E1-F2-I3 | E1-F2-I3: Record user management audits | epic:AuthUserManagement,type:Feature,priority:P1,area:Observability | Week 3 | 6 | OPEN | 2025-11-03T03:26:12.792304+00:00 |
+| E2-F1-I1 | E2-F1-I1: Design unified content schema | epic:ContentManagement,type:Feature,priority:P0,area:Backend | Week 1 | 7 | OPEN | 2025-11-03T03:26:15.001135+00:00 |
+| E2-F1-I2 | E2-F1-I2: Implement content lifecycle states | epic:ContentManagement,type:Feature,priority:P0,area:Workflow | Week 2 | 8 | OPEN | 2025-11-03T03:26:17.008723+00:00 |
+| E2-F1-I3 | E2-F1-I3: Enable revision history and rollback | epic:ContentManagement,type:Feature,priority:P1,area:AdminUI | Week 3 | 9 | OPEN | 2025-11-03T03:26:19.262420+00:00 |
+| E2-F2-I1 | E2-F2-I1: Integrate rich text editor | epic:ContentManagement,type:Feature,priority:P0,area:Editor | Week 2 | 10 | OPEN | 2025-11-03T03:26:21.302935+00:00 |
+| E2-F2-I2 | E2-F2-I2: Build content duplication and quick publish | epic:ContentManagement,type:Feature,priority:P1,area:Workflow | Week 3 | 11 | OPEN | 2025-11-03T03:26:23.320067+00:00 |
+| E2-F2-I3 | E2-F2-I3: Configure content preview links | epic:ContentManagement,type:Feature,priority:P1,area:Security | Week 3 | 12 | OPEN | 2025-11-03T03:26:25.180446+00:00 |
+| E3-F1-I1 | E3-F1-I1: Implement media upload pipeline | epic:MediaLibrary,type:Feature,priority:P0,area:Storage | Week 2 | 13 | OPEN | 2025-11-03T03:26:27.427526+00:00 |
+| E3-F1-I2 | E3-F1-I2: Build media browser interface | epic:MediaLibrary,type:Feature,priority:P1,area:AdminUI | Week 3 | 14 | OPEN | 2025-11-03T03:26:29.536303+00:00 |
+| E3-F1-I3 | E3-F1-I3: Support media replacements with stable URLs | epic:MediaLibrary,type:Feature,priority:P1,area:Storage | Week 3 | 15 | OPEN | 2025-11-03T03:26:32.917349+00:00 |
+| E3-F1-I4 | E3-F1-I4: Link media to content entities | epic:MediaLibrary,type:Feature,priority:P1,area:Backend | Week 3 | 16 | OPEN | 2025-11-03T03:26:35.165930+00:00 |
+| E4-F1-I1 | E4-F1-I1: Implement taxonomy schema | epic:TaxonomyMetadata,type:Feature,priority:P0,area:Backend | Week 2 | 17 | OPEN | 2025-11-03T03:26:37.360233+00:00 |
+| E4-F1-I2 | E4-F1-I2: Build taxonomy management UI | epic:TaxonomyMetadata,type:Feature,priority:P1,area:AdminUI | Week 3 | 18 | OPEN | 2025-11-03T03:26:39.365855+00:00 |
+| E4-F1-I3 | E4-F1-I3: Generate sitemap and robots management | epic:TaxonomyMetadata,type:Feature,priority:P1,area:SEO | Week 3 | 19 | OPEN | 2025-11-03T03:26:41.446437+00:00 |
+| E4-F1-I4 | E4-F1-I4: Apply taxonomy-aware routing | epic:TaxonomyMetadata,type:Feature,priority:P1,area:Routing | Week 3 | 20 | OPEN | 2025-11-03T03:26:43.522730+00:00 |
+| E5-F1-I1 | E5-F1-I1: Configure publishing workflow transitions | epic:PublishingWorkflow,type:Feature,priority:P0,area:Workflow | Week 2 | 21 | OPEN | 2025-11-03T03:26:45.509664+00:00 |
+| E5-F1-I2 | E5-F1-I2: Implement scheduling queue integration | epic:PublishingWorkflow,type:Feature,priority:P0,area:DevOps | Week 2 | 22 | OPEN | 2025-11-03T03:26:48.010032+00:00 |
+| E5-F1-I3 | E5-F1-I3: Deliver publish notifications and change logs | epic:PublishingWorkflow,type:Feature,priority:P1,area:Notifications | Week 3 | 23 | OPEN | 2025-11-03T03:26:49.978111+00:00 |
+| E5-F1-I4 | E5-F1-I4: Support workflow rollbacks | epic:PublishingWorkflow,type:Feature,priority:P1,area:Workflow | Week 3 | 24 | OPEN | 2025-11-03T03:26:51.910659+00:00 |
+| E6-F1-I1 | E6-F1-I1: Build Blade theme skeleton | epic:PublicFrontend,type:Feature,priority:P0,area:Frontend | Week 2 | 25 | OPEN | 2025-11-03T03:26:53.954960+00:00 |
+| E6-F1-I2 | E6-F1-I2: Implement public content delivery | epic:PublicFrontend,type:Feature,priority:P0,area:Frontend | Week 3 | 26 | OPEN | 2025-11-03T03:26:55.940486+00:00 |
+| E6-F1-I3 | E6-F1-I3: Add caching and invalidation layer | epic:PublicFrontend,type:Feature,priority:P1,area:Performance | Week 3 | 27 | OPEN | 2025-11-03T03:26:57.869442+00:00 |
+| E6-F1-I4 | E6-F1-I4: Provide configurable home and error pages | epic:PublicFrontend,type:Feature,priority:P1,area:Frontend | Week 4 | 28 | OPEN | 2025-11-03T03:26:59.976182+00:00 |
+| E7-F1-I1 | E7-F1-I1: Implement site settings registry | epic:SiteConfiguration,type:Feature,priority:P0,area:AdminUI | Week 2 | 29 | OPEN | 2025-11-03T03:27:01.880750+00:00 |
+| E7-F1-I2 | E7-F1-I2: Develop menu management module | epic:SiteConfiguration,type:Feature,priority:P1,area:Frontend | Week 3 | 30 | OPEN | 2025-11-03T03:27:04.243771+00:00 |
+| E7-F1-I3 | E7-F1-I3: Configure theme and announcement settings | epic:SiteConfiguration,type:Feature,priority:P1,area:Frontend | Week 3 | 31 | OPEN | 2025-11-03T03:27:06.495423+00:00 |
+| E7-F1-I4 | E7-F1-I4: Harden settings audit and backups | epic:SiteConfiguration,type:Feature,priority:P1,area:Security | Week 4 | 32 | OPEN | 2025-11-03T03:27:08.565068+00:00 |
+| E8-F1-I1 | E8-F1-I1: Expose public content API | epic:APIHeadless,type:Feature,priority:P0,area:API | Week 3 | 33 | OPEN | 2025-11-03T03:27:10.633124+00:00 |
+| E8-F1-I2 | E8-F1-I2: Deliver authenticated CRUD API | epic:APIHeadless,type:Feature,priority:P0,area:API | Week 3 | 34 | OPEN | 2025-11-03T03:27:12.935947+00:00 |
+| E8-F1-I3 | E8-F1-I3: Implement webhook notifications | epic:APIHeadless,type:Feature,priority:P1,area:Integrations | Week 4 | 35 | OPEN | 2025-11-03T03:27:15.152072+00:00 |
+| E8-F1-I4 | E8-F1-I4: Publish API documentation portal | epic:APIHeadless,type:Feature,priority:P1,area:Docs | Week 4 | 36 | OPEN | 2025-11-03T03:27:17.233403+00:00 |
+| E9-F1-I1 | E9-F1-I1: Harden input validation | epic:SecurityCompliance,type:Feature,priority:P0,area:Security | Week 1 | 37 | OPEN | 2025-11-03T03:27:19.309185+00:00 |
+| E9-F1-I2 | E9-F1-I2: Enforce rate limiting and encryption | epic:SecurityCompliance,type:Feature,priority:P0,area:Security | Week 2 | 38 | OPEN | 2025-11-03T03:27:21.309793+00:00 |
+| E9-F1-I3 | E9-F1-I3: Implement security monitoring | epic:SecurityCompliance,type:Feature,priority:P1,area:Observability | Week 3 | 39 | OPEN | 2025-11-03T03:27:23.392334+00:00 |
+| E10-F1-I1 | E10-F1-I1: Configure CI pipeline | epic:DevOpsQA,type:Feature,priority:P0,area:CI | Week 1 | 40 | OPEN | 2025-11-03T03:27:25.231938+00:00 |
+| E10-F1-I2 | E10-F1-I2: Prepare environment templates | epic:DevOpsQA,type:Feature,priority:P1,area:DevOps | Week 2 | 41 | OPEN | 2025-11-03T03:27:27.099325+00:00 |
+| E10-F1-I3 | E10-F1-I3: Seed data and rollback scripts | epic:DevOpsQA,type:Feature,priority:P1,area:QA | Week 2 | 42 | OPEN | 2025-11-03T03:27:29.258515+00:00 |
+| E10-F1-I4 | E10-F1-I4: Establish manual QA approval flow | epic:DevOpsQA,type:Feature,priority:P1,area:QA | Week 3 | 43 | OPEN | 2025-11-03T03:27:31.415569+00:00 |
+| E11-F1-I1 | E11-F1-I1: Establish modular folder structure | epic:SystemArchitecture,type:Feature,priority:P0,area:Architecture | Week 1 | 44 | OPEN | 2025-11-03T03:27:33.498472+00:00 |
+| E11-F1-I2 | E11-F1-I2: Implement repository pattern | epic:SystemArchitecture,type:Feature,priority:P0,area:Architecture | Week 2 | 45 | OPEN | 2025-11-03T03:27:35.468406+00:00 |
+| E11-F1-I3 | E11-F1-I3: Configure event-driven hooks | epic:SystemArchitecture,type:Feature,priority:P1,area:Architecture | Week 3 | 46 | OPEN | 2025-11-03T03:27:37.987153+00:00 |
+| E11-F1-I4 | E11-F1-I4: Prepare localization and multi-site readiness | epic:SystemArchitecture,type:Feature,priority:P1,area:Architecture | Week 3 | 47 | OPEN | 2025-11-03T03:27:40.042924+00:00 |
+
+## Implementation Trace
+
+| Issue ID | Files Touched | Tests Added | Endpoints | Migrations | Notes |
+| --- | --- | --- | --- | --- | --- |
+| E6-F1-I2 | app/Http/Controllers/Public/PostController.php; app/Http/Controllers/Public/PageController.php; app/Http/Controllers/Api/V1/PostController.php; app/Http/Controllers/Api/V1/PageController.php; app/Services/ContentDeliveryService.php; resources/views/posts/index.blade.php; resources/views/posts/show.blade.php; resources/views/pages/show.blade.php; routes/web.php; routes/api.php; app/Http/Middleware/EnsureCorrelationId.php; config/logging.php; bootstrap/app.php; OPENAPI.yaml; database/migrations/2024_01_01_000071_add_publication_indexes_to_contents.php; README.md; CHANGELOG.md; COVERAGE_LEDGER.md; phpunit.xml | tests/Feature/PublicContentDeliveryTest.php; tests/Feature/PublicContentApiTest.php | /posts, /pages/{slug}, /api/v1/posts, /api/v1/posts/{slug}, /api/v1/pages/{slug} | 2024_01_01_000071_add_publication_indexes_to_contents.php | Implemented public content delivery with JSON logging and audit trails |
+| E8-F1-I1 | .env.example; config/services.php; app/Providers/AppServiceProvider.php; routes/api.php; bootstrap/app.php; app/Http/Controllers/Api/V1/PostController.php; app/Http/Controllers/Api/V1/PageController.php; app/Http/Resources/PostResource.php; app/Http/Resources/PageResource.php; OPENAPI.yaml; README.md; CHANGELOG.md; COVERAGE_LEDGER.md; tests/Feature/PublicContentApiTest.php | tests/Feature/PublicContentApiTest.php | /api/v1/posts, /api/v1/posts/{slug}, /api/v1/pages/{slug} | None | JSON:API compliant public API with rate limiting, API logging, and updated docs |
