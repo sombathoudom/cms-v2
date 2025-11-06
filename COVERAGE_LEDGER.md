@@ -2,7 +2,7 @@
 
 | Feature | Models | Endpoints / Resources | Tests |
 | --- | --- | --- | --- |
-| Authentication & User Management | `User`, `Role`, `Permission`, `AuditLog` | Policies (`AuthServiceProvider`), Filament admin auth | `tests/Feature/AuthTest.php`, `tests/Feature/RbacPolicyTest.php` |
+| Authentication & User Management | `User`, `Role`, `Permission`, `AuditLog` | Breeze auth routes, Policies (`AuthServiceProvider`), Filament admin auth | `tests/Feature/AuthTest.php`, `tests/Feature/AuthenticationScaffoldingTest.php`, `tests/Feature/RbacPolicyTest.php` |
 | Content Management (Pages & Posts) | `Content`, `ContentRevision`, `ContentSlugHistory`, `SeoMeta` | Filament `ContentResource` | `tests/Feature/ContentCrudTest.php`, `tests/Feature/FactoryTest.php` |
 | Media Library | `Media`, `MediaUsage` | Filament `MediaResource` | `tests/Feature/MediaCrudTest.php`, `tests/Feature/FactoryTest.php` |
 | Taxonomy & Metadata | `Category`, `Tag`, `SitemapEntry`, `SeoMeta` | Filament `CategoryResource`, `TagResource` | `tests/Feature/TaxonomyCrudTest.php`, `tests/Feature/FactoryTest.php` |
