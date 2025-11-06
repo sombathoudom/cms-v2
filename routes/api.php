@@ -10,6 +10,4 @@ Route::prefix('v1')->middleware('throttle:public-content-api')->group(function (
     Route::get('/pages/{slug}', [PageController::class, 'show'])->name('api.v1.pages.show');
 });
 
-use Illuminate\Support\Facades\Route;
-
 Route::get('/health', \App\Http\Controllers\HealthController::class);
