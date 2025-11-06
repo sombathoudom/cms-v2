@@ -50,6 +50,12 @@ CI enforces Pint, PHPStan (level 8), and Pest across PHP 8.3/8.4 with MySQL & Po
 - Extensive migrations for CMS entities with soft deletes and foreign keys
 - Demo seed data (**DO NOT USE IN PRODUCTION**)
 
+## Security Defaults
+
+- Configurable password policy enforcing minimum length, mixed character sets, and Have I Been Pwned compromised password checks via the `PASSWORD_*` environment flags.
+- Password history tracking prevents reusing the last `PASSWORD_PREVENT_REUSE` secrets for every account.
+- Session idle timeout middleware logs users out after `SESSION_IDLE_TIMEOUT` seconds of inactivity and records an `auth.session.timeout` audit trail.
+
 ## License
 
 MIT
