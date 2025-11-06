@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\UserStatus;
+use App\Models\PasswordHistory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,8 +58,57 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::created(function (self $user): void {
+            $password = $user->getAuthPassword();
+
+            if ($password !== null) {
+                $user->recordPasswordHistory($password);
+            }
+        });
+
+        static::updated(function (self $user): void {
+            if ($user->wasChanged('password')) {
+                $password = $user->getAuthPassword();
+
+                if ($password !== null) {
+                    $user->recordPasswordHistory($password);
+                }
+            }
+        });
+    }
+
     public function contents(): HasMany
     {
         return $this->hasMany(Content::class, 'author_id');
+    }
+
+    public function passwordHistories(): HasMany
+    {
+        return $this->hasMany(PasswordHistory::class)->orderByDesc('created_at');
+    }
+
+    public function recordPasswordHistory(string $hashedPassword): void
+    {
+        $historyLimit = (int) config('security.password.reuse_prevent', 0);
+
+        $this->passwordHistories()->create([
+            'password' => $hashedPassword,
+        ]);
+
+        if ($historyLimit <= 0) {
+            return;
+        }
+
+        $idsToDelete = $this->passwordHistories()
+            ->orderByDesc('created_at')
+            ->pluck('id')
+            ->slice($historyLimit)
+            ->values();
+
+        if ($idsToDelete->isNotEmpty()) {
+            PasswordHistory::whereIn('id', $idsToDelete->all())->delete();
+        }
     }
 }

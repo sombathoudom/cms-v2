@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 use Laravel\Scout\EngineManager;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
         $this->configureScout();
+        $this->configurePasswordRules();
     }
 
     private function configureRateLimiting(): void
@@ -77,5 +79,34 @@ class AppServiceProvider extends ServiceProvider
 
         Log::channel('stack')->warning('Scout enabled without Meilisearch host, falling back to database driver.');
         Config::set('scout.driver', 'database');
+    }
+
+    private function configurePasswordRules(): void
+    {
+        Password::defaults(function () {
+            $rule = Password::min((int) config('security.password.min_length', 12));
+
+            if (config('security.password.require_letters', true)) {
+                $rule = $rule->letters();
+            }
+
+            if (config('security.password.require_mixed_case', true)) {
+                $rule = $rule->mixedCase();
+            }
+
+            if (config('security.password.require_numbers', true)) {
+                $rule = $rule->numbers();
+            }
+
+            if (config('security.password.require_symbols', true)) {
+                $rule = $rule->symbols();
+            }
+
+            if (config('security.password.uncompromised', true)) {
+                $rule = $rule->uncompromised();
+            }
+
+            return $rule;
+        });
     }
 }

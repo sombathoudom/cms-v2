@@ -341,5 +341,8 @@ components:
           properties:
             code:
               type: string
+              description: |
+                Machine readable error code.
+                Known values include `RATE_LIMIT_EXCEEDED` and `SESSION_TIMEOUT`.
             message:
               type: string
