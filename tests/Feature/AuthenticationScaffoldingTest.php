@@ -20,8 +20,8 @@ it('E1-F1-I1 registers a viewer and dispatches verification', function (): void 
     $response = $this->post('/register', [
         'name' => 'Test User',
         'email' => 'new-user@example.com',
-        'password' => 'Password!123',
-        'password_confirmation' => 'Password!123',
+        'password' => 'S3curePass!789',
+        'password_confirmation' => 'S3curePass!789',
     ]);
 
     $response->assertRedirect('/admin');
@@ -43,12 +43,12 @@ it('E1-F1-I1 registers a viewer and dispatches verification', function (): void 
 it('E1-F1-I1 logs in with remember me and records audit trail', function (): void {
     $user = User::factory()->create([
         'email' => 'login@example.com',
-        'password' => Hash::make('Password!123'),
+        'password' => Hash::make('S3curePass!789'),
     ]);
 
     $response = $this->post('/login', [
         'email' => 'login@example.com',
-        'password' => 'Password!123',
+        'password' => 'S3curePass!789',
         'remember' => true,
     ]);
 
@@ -75,7 +75,7 @@ it('E1-F1-I1 throttles repeated login attempts', function (): void {
     $email = 'throttle@example.com';
     User::factory()->create([
         'email' => $email,
-        'password' => Hash::make('Password!123'),
+        'password' => Hash::make('S3curePass!789'),
     ]);
 
     $key = strtolower($email).'|127.0.0.1';
@@ -99,7 +99,7 @@ it('E1-F1-I1 throttles repeated login attempts', function (): void {
 it('E1-F1-I1 emails password reset link and logs request', function (): void {
     $user = User::factory()->create([
         'email' => 'reset@example.com',
-        'password' => Hash::make('Password!123'),
+        'password' => Hash::make('S3curePass!789'),
     ]);
 
     $response = $this->post('/forgot-password', [
@@ -120,7 +120,7 @@ it('E1-F1-I1 emails password reset link and logs request', function (): void {
 it('E1-F1-I1 resets password successfully', function (): void {
     $user = User::factory()->create([
         'email' => 'update@example.com',
-        'password' => Hash::make('Password!123'),
+        'password' => Hash::make('S3curePass!789'),
     ]);
 
     $token = Password::createToken($user);

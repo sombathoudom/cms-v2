@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(App\Http\Middleware\EnsureCorrelationId::class);
+        $middleware->appendToGroup('web', App\Http\Middleware\EnforceSessionTimeout::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (ThrottleRequestsException $exception, Request $request) {

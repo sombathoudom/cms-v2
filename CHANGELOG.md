@@ -8,3 +8,5 @@
 - Hardened public content API responses to JSON:API spec with pagination links, rate limiting, and API logging.
 - Correlation ID middleware, JSON logging formatter, and audit logging for content views.
 - Tests covering web delivery, API contracts, validation errors, and RBAC protections for published content.
+- Configurable password complexity enforcement, password history tracking, and session idle timeout auditing for web auth flows.
+- Authentication audit trail with immutable logging, secured API listing, and Filament-based review filters.
