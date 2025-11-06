@@ -141,6 +141,72 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /audit-logs:
+    get:
+      summary: List authentication audit logs
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: integer
+        - in: query
+          name: event
+          schema:
+            type: string
+        - in: query
+          name: date_from
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: date_to
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - meta
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditLog'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+                  links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '401':
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     JsonApiIdentifier:
@@ -284,8 +350,51 @@ components:
               type: string
               format: date-time
               nullable: true
-        links:
-          $ref: '#/components/schemas/ResourceLinks'
+      links:
+        $ref: '#/components/schemas/ResourceLinks'
+    AuditLog:
+      type: object
+      required:
+        - id
+        - event
+        - target
+        - ip_address
+        - properties
+        - created_at
+      properties:
+        id:
+          type: string
+        event:
+          type: string
+        actor:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+        target:
+          type: object
+          required:
+            - type
+            - id
+          properties:
+            type:
+              type: string
+            id:
+              type: string
+        ip_address:
+          type: string
+        properties:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
     PaginationMeta:
       type: object
       required:

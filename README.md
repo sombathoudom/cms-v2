@@ -46,6 +46,7 @@ CI enforces Pint, PHPStan (level 8), and Pest across PHP 8.3/8.4 with MySQL & Po
 - Laravel Breeze authentication with login, registration, email verification, password resets, and remember-me support
 - Laravel Scout search with Meilisearch integration
 - Filament admin panel resources for Content, Media, Taxonomy, and Settings
+- Filament audit trail explorer with user/date filtering for authentication events
 - Role and permission management via spatie/laravel-permission
 - Health check endpoint at `/health`
 - Extensive migrations for CMS entities with soft deletes and foreign keys
@@ -56,6 +57,7 @@ CI enforces Pint, PHPStan (level 8), and Pest across PHP 8.3/8.4 with MySQL & Po
 - Configurable password policy enforcing minimum length, mixed character sets, and Have I Been Pwned compromised password checks via the `PASSWORD_*` environment flags.
 - Password history tracking prevents reusing the last `PASSWORD_PREVENT_REUSE` secrets for every account.
 - Session idle timeout middleware logs users out after `SESSION_IDLE_TIMEOUT` seconds of inactivity and records an `auth.session.timeout` audit trail.
+- Dedicated JSON-formatted audit log channel with immutable storage of login, logout, and credential lifecycle actions.
 
 ## License
 

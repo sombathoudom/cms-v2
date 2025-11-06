@@ -54,7 +54,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => explode(',', env('LOG_STACK', 'single,audit')),
             'ignore_exceptions' => false,
             'tap' => [App\Logging\CustomizeFormatter::class],
         ],
@@ -63,6 +63,15 @@ return [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+            'tap' => [App\Logging\CustomizeFormatter::class],
+        ],
+
+        'audit' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit.log'),
+            'level' => env('LOG_AUDIT_LEVEL', 'info'),
+            'days' => env('LOG_AUDIT_DAYS', 30),
             'replace_placeholders' => true,
             'tap' => [App\Logging\CustomizeFormatter::class],
         ],

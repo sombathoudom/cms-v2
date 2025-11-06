@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\AuditLog;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\Media;
 use App\Models\Setting;
 use App\Models\Tag;
+use App\Policies\AuditLogPolicy;
 use App\Policies\CategoryPolicy;
 use App\Policies\ContentPolicy;
 use App\Policies\MediaPolicy;
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Category::class => CategoryPolicy::class,
         Tag::class => TagPolicy::class,
         Setting::class => SettingPolicy::class,
+        AuditLog::class => AuditLogPolicy::class,
     ];
 
     /**

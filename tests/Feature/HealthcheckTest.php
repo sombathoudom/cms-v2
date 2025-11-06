@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Redis;
-use RuntimeException;
 
 it('returns ok health response', function () {
     Redis::shouldReceive('connection->ping')
@@ -17,7 +16,7 @@ it('returns ok health response', function () {
 it('fails when redis is unavailable', function () {
     Redis::shouldReceive('connection->ping')
         ->once()
-        ->andThrow(new RuntimeException('Connection failed'));
+        ->andThrow(new \RuntimeException('Connection failed'));
 
     $response = $this->getJson('/health');
 

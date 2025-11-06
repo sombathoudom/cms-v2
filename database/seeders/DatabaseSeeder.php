@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             'settings.create',
             'settings.update',
             'settings.delete',
+            'audit.view',
         ];
 
         foreach ($permissions as $permission) {

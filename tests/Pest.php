@@ -30,6 +30,7 @@ function seedPermissions(): void
         'settings.create',
         'settings.update',
         'settings.delete',
+        'audit.view',
     ];
 
     foreach ($permissions as $permission) {
