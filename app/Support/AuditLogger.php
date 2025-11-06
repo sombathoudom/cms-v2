@@ -19,7 +19,7 @@ class AuditLogger
             return;
         }
 
-        $correlationId = (string) $request->attributes->get('correlation_id');
+        $correlationId = $request->attributes->get('correlation_id');
 
         $payload = array_merge($properties, [
             'correlation_id' => $correlationId,
@@ -35,14 +35,16 @@ class AuditLogger
             'ip_address' => $request->ip(),
         ]);
 
-        Log::info('audit.event', array_filter([
+        Log::channel('audit')->info('audit.event', [
             'event' => $event,
             'user_id' => $actor?->getKey(),
             'auditable_type' => $auditable->getMorphClass(),
             'auditable_id' => $auditable->getKey(),
             'correlation_id' => $correlationId,
             'ip' => $request->ip(),
-        ]));
+            'properties' => $payload,
+            'recorded_at' => now()->toAtomString(),
+        ]);
     }
 
     /**

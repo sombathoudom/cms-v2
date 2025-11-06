@@ -29,6 +29,10 @@ class DatabaseSeeder extends Seeder
             'content.create',
             'content.update',
             'content.delete',
+            'users.view',
+            'users.create',
+            'users.update',
+            'users.delete',
             'media.view',
             'media.create',
             'media.update',
@@ -41,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'settings.create',
             'settings.update',
             'settings.delete',
+            'audit.view',
         ];
 
         foreach ($permissions as $permission) {
@@ -75,28 +80,28 @@ class DatabaseSeeder extends Seeder
         $admin = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('S3curePass!789'),
         ]);
         $admin->assignRole('Admin');
 
         $editor = User::factory()->create([
             'name' => 'Editor User',
             'email' => 'editor@example.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('S3curePass!789'),
         ]);
         $editor->assignRole('Editor');
 
         $author = User::factory()->create([
             'name' => 'Author User',
             'email' => 'author@example.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('S3curePass!789'),
         ]);
         $author->assignRole('Author');
 
         $viewer = User::factory()->create([
             'name' => 'Viewer User',
             'email' => 'viewer@example.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('S3curePass!789'),
         ]);
         $viewer->assignRole('Viewer');
 

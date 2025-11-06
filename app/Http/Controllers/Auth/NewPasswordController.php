@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Support\AuditLogger;
+use App\Support\PasswordRules;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Password as PasswordRule;
 use Illuminate\View\View;
 
 class NewPasswordController extends Controller
@@ -24,14 +24,15 @@ class NewPasswordController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $resetUser = null;
+        $email = $request->string('email')->lower()->value();
+        $userForValidation = User::where('email', $email)->first();
+
         $request->validate([
             'token' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', PasswordRule::defaults()],
+            'password' => array_merge(['required', 'confirmed'], PasswordRules::forUser($userForValidation)),
         ]);
-
-        $resetUser = null;
-        $email = $request->string('email')->lower()->value();
 
         $status = Password::reset(
             [
@@ -41,8 +42,10 @@ class NewPasswordController extends Controller
                 'token' => $request->string('token')->value(),
             ],
             function (User $user, string $password) use (&$resetUser) {
+                $hashedPassword = Hash::make($password);
+
                 $user->forceFill([
-                    'password' => Hash::make($password),
+                    'password' => $hashedPassword,
                     'remember_token' => Str::random(60),
                 ])->save();
 

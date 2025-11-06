@@ -7,6 +7,10 @@ use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class)->in('Feature');
 
+beforeEach(function (): void {
+    config()->set('security.password.uncompromised', false);
+});
+
 function seedPermissions(): void
 {
     $permissions = [
@@ -14,6 +18,10 @@ function seedPermissions(): void
         'content.create',
         'content.update',
         'content.delete',
+        'users.view',
+        'users.create',
+        'users.update',
+        'users.delete',
         'media.view',
         'media.create',
         'media.update',
@@ -26,6 +34,7 @@ function seedPermissions(): void
         'settings.create',
         'settings.update',
         'settings.delete',
+        'audit.view',
     ];
 
     foreach ($permissions as $permission) {
