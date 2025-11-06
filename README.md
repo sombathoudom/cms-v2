@@ -46,8 +46,10 @@ CI enforces Pint, PHPStan (level 8), and Pest across PHP 8.3/8.4 with MySQL & Po
 - Laravel Breeze authentication with login, registration, email verification, password resets, and remember-me support
 - Laravel Scout search with Meilisearch integration
 - Filament admin panel resources for Content, Media, Taxonomy, and Settings
+- Filament user administration dashboard with search, role filters, and bulk activation controls
 - Filament audit trail explorer with user/date filtering for authentication events
 - Role and permission management via spatie/laravel-permission
+- Authenticated `/api/v1/users` CRUD endpoints with audit logging for account lifecycle events
 - Health check endpoint at `/health`
 - Extensive migrations for CMS entities with soft deletes and foreign keys
 - Demo seed data (**DO NOT USE IN PRODUCTION**)
